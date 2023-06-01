@@ -1,0 +1,17 @@
+{
+  "name": "botpanel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "echo ok",
+    "start": "node index.mjs"
+  },
+  "author": "TMBMode",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6",
+    "systeminformation": "^5.17.16"
+  }
+}

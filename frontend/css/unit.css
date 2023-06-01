@@ -1,0 +1,11 @@
+:root {
+  --vu: 1vw;
+  --vt: 4vw;
+}
+
+@media only screen and (max-width: 768px) {
+  :root {
+    --vu: 4vw;
+    --vt: 8vw;
+  }
+}

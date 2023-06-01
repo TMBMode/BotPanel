@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BotPanel WebUI</title>
+  <link rel="stylesheet" href="./css/base.css">
+  <style>
+    #output {
+      display: block;
+      background-color: black;
+      color: white;
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 2%;
+      white-space: pre-wrap;
+      overflow-wrap: break-word;
+      font-family: monospace;
+      overflow-y: auto;
+      user-select: text;
+      opacity: 0;
+      transition: opacity 1s;
+      z-index: 0;
+    }
+    #dialog {
+      width: 0;
+      height: 3em;
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      background-color: #f64c;
+      font-size: var(--vt);
+      line-height: 3em;
+      overflow: hidden;
+      animation-duration: 1s;
+      animation-timing-function: ease;
+      animation-fill-mode: forwards;
+      z-index: 2;
+    }
+    #dialog > .text {
+      display: inline-block;
+      color: white;
+      margin-right: calc(2*var(--vu));
+    }
+    #dialog > .input {
+      display: inline-block;
+      background-color: #fff4;
+      color: black;
+      border: none;
+      border-bottom: calc(0.5*var(--vu)) #f64 solid;
+      padding: 0.2em;
+      font-size: var(--vt);
+      max-width: 50vw;
+    }
+    @keyframes dialogIn {
+      from { left: 0; width: 0vw; }
+      to { left: 0; width: 100vw; }
+    }
+    @keyframes dialogOut {
+      from { right: 0; width: 100vw; }
+      to { right: 0; width: 0vw; }
+    }
+    #button {
+      display: block;
+      position: fixed;
+      top: calc(0.5*var(--vu));
+      right: calc(0.5*var(--vu));
+      width: calc(2*var(--vu));
+      height: calc(2*var(--vu));
+      line-height: calc(2*var(--vu));
+      font-size: calc(1.5*var(--vu));
+      opacity: 0;
+      transition: opacity 1s ease 1s;
+      pointer-events: none;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="output"></div>
+  <div id="dialog">
+    <div class="text"></div>
+    <input type="text" class="input">
+  </div>
+  <div id="button"> ❌ </div>
+  <script src="./webui.js"></script>
+</body>
+</html>

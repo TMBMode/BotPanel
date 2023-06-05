@@ -83,7 +83,7 @@ app.get('/spawn/:key', async (req, res) => {
     return res.status(401).send('无效密钥');
   } else if (Date.now() > dbRes.expires) {
     log.warn(`User tries to use expired key ${key}`);
-    return res.status(410).send('授权已到期');
+    return res.status(404).send('授权已到期');
   }
   let procId = await addProc({
     key,

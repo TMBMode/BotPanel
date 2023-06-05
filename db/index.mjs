@@ -51,8 +51,7 @@ const addKey = (params) =>
   new Promise(async (resolve, reject) => {
     const key = params.key;
     if (await checkKey(key)) {
-      resolve(STAT.key_unavailable);
-      console.log('(this should not be logged)');
+      return resolve(STAT.key_unavailable);
     }
     db.run(`INSERT INTO 
       keys (key, owner, expires, config_path) 

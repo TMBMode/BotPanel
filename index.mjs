@@ -77,37 +77,41 @@ app.use('/', express.static('frontend', {
 
 app.get('/spawn/:key', async (req, res) => {
   const key = req.params.key;
+  const ip = req.ip || 'N/A';
   const dbRes = await db.getByKey(key);
   if (dbRes === db.STAT.key_nonexistent) {
-    log.warn(`User entered invalid key ${key}`);
+    log.warn(`User entered invalid key ${key} (ip: ${ip})`);
     return res.status(401).send('无效密钥');
   } else if (Date.now() > dbRes.expires) {
-    log.warn(`User tries to use expired key ${key}`);
+    log.warn(`User tries to use expired key ${key} (ip: ${ip})`);
     return res.status(404).send('授权已到期');
   }
   let procId = await addProc({
     key,
     info: dbRes
   });
+  log.notice(`Spawn request finished with procId ${procId} (ip: ${ip})`);
   res.status(201).send(`${procId}`);
 });
 
 app.get('/kill/:id', async (req, res) => {
   const procId = req.params.id;
+  const ip = req.ip || 'N/A';
   if (!PROCPOOL[procId]) {
-    log.error(`Can't locate proc ${procId} to kill`);
+    log.error(`Can't locate proc ${procId} to kill (ip: ${ip})`);
     return res.status(404).send('找不到进程');
   }
   PROCPOOL[procId].proc.kill('SIGINT');
   PROCPOOL[procId] = null;
-  log.notice(`Killed proc ${procId}`);
+  log.notice(`Killed proc ${procId} (ip: ${ip})`);
   res.status(200).send('成功结束');
 });
 
 app.get('/stream/:id', (req, res) => {
   const procId = req.params.id;
+  const ip = req.ip || 'N/A';
   if (!PROCPOOL[procId]) {
-    log.warn(`Can't locate proc ${procId} to stream`);
+    log.warn(`Can't locate proc ${procId} (ip: ${ip})`);
     return res.status(404).send('找不到进程');
   }
   res.status(200).send(PROCPOOL[procId].output.text);

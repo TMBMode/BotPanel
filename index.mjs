@@ -77,7 +77,7 @@ app.use('/', express.static('frontend', {
 
 app.get('/spawn/:key', async (req, res) => {
   const key = req.params.key;
-  const ip = req.ip || 'N/A';
+  const ip = req.headers['x-real-ip'] || req.ip || 'N/A';
   const dbRes = await db.getByKey(key);
   if (dbRes === db.STAT.key_nonexistent) {
     log.warn(`User entered invalid key ${key} (ip: ${ip})`);
@@ -96,7 +96,7 @@ app.get('/spawn/:key', async (req, res) => {
 
 app.get('/kill/:id', async (req, res) => {
   const procId = req.params.id;
-  const ip = req.ip || 'N/A';
+  const ip = req.headers['x-real-ip'] || req.ip || 'N/A';
   if (!PROCPOOL[procId]) {
     log.error(`Can't locate proc ${procId} to kill (ip: ${ip})`);
     return res.status(404).send('找不到进程');
@@ -109,7 +109,7 @@ app.get('/kill/:id', async (req, res) => {
 
 app.get('/stream/:id', (req, res) => {
   const procId = req.params.id;
-  const ip = req.ip || 'N/A';
+  const ip = req.headers['x-real-ip'] || req.ip || 'N/A';
   if (!PROCPOOL[procId]) {
     log.warn(`Can't locate proc ${procId} (ip: ${ip})`);
     return res.status(404).send('找不到进程');

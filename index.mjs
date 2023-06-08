@@ -64,6 +64,12 @@ const addProc = async (params) => {
     output.text = `(${output.length}) ` +
       (output.text.replace(/^\([0-9]+\) /, '') + chunk).slice(-OUTPUT_LIMIT);
   });
+  proc.on('error', () => {
+    log.error(`Error occured at proc ${procId}`);
+  });
+  proc.on('disconnect', () => {
+    log.warn(`Disconnected from proc ${procId}`);
+  });
   PROCPOOL[procId] = {
     proc, output, info: params.info
   };

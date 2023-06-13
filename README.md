@@ -2,12 +2,23 @@
 WebUI for chatgpt-on-wechat [personal fork](https://github.com/TMBMode/chatgpt-on-wechat)
 
 ## What
-ChatGPT on Wechat web deployment
+ChatGPT on Wechat WebUI
 - Supports multiple instantaneous sessions via child processes
-- User management system with keys
-- Keys have expire dates, and processes get killed at their expire dates
+- Key-based user management system
+- Keys have expire dates to kill respective processes on time
 
-## Usage
+## Images
+> sensitive information erased
+- Admin Console
+![admin](./readme_images/admin.png)
+- Login
+![login](./readme_images/login.png)
+- User Console
+![main](./readme_images/main.png)
+- Stop
+![stop](./readme_images/stop.png)
+
+## Deploy
 Ensure Python ~3.8+ & NodeJS ~v16+ is installed (actual min support versions aren't tested)
 ```shell
 cd ~

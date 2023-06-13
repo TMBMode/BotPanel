@@ -27,6 +27,7 @@ git clone https://github.com/TMBMode/BotPanel.git
 cd chatgpt-on-wechat && pip install -r requirements.txt
 cd .. && mv BotPanel botpanel
 cd botpanel && npm i
+# prepare your config files for the bot under ~/chatgpt-on-wechat/configs/ #
 # set your environment variables (see table below) #
 node index.mjs
 ```

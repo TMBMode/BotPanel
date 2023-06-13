@@ -10,13 +10,13 @@ ChatGPT on Wechat WebUI
 ## Images
 > sensitive information erased
 - Admin Console
-![admin](./readme_images/admin.png)
+<img src='./readme_images/admin.png' width='200px'>
 - Login
-![login](./readme_images/login.png)
+<img src='./readme_images/login.png' width='200px'>
 - User Console
-![main](./readme_images/main.png)
+<img src='./readme_images/main.png' width='200px'>
 - Stop
-![stop](./readme_images/stop.png)
+<img src='./readme_images/stop.png' width='200px'>
 
 ## Deploy
 Ensure Python ~3.8+ & NodeJS ~v16+ is installed (actual min support versions aren't tested)

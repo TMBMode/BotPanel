@@ -22,9 +22,9 @@ node index.mjs
 For long-term runs, use `screen` before `node index.mjs` and use `ctrl-a-d` to detach before disconnecting SSH
  
 ## Environment Variables
-| Variable     | Value   | Usage   
-| --------     | -----   | ----- 
-| BOTPATH      | string  | Specify the `cwd` directory, like `/home/ubuntu/chatgpt-on-wechat`
+| Variable     | Value   | Desc   
+| --------     | -----   | ---- 
+| BOT_PATH      | string  | The `cwd` directory of the **bot**, e.g. `/home/ubuntu/chatgpt-on-wechat`
 | PORT         | int     | The port to run on, defaults to `14514`
 | OUTPUT_LIMIT | int     | Limits how much text can be stored for a single session
 | DB_PATH      | string  | Specify the path of the database used to store keys

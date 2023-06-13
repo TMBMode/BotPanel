@@ -6,7 +6,7 @@ import { log, color } from './utils/logging.mjs';
 import { tribool, generateUid, strSize, dateToString } from './utils/functions.mjs';
 import db from './db/index.mjs';
 
-const BOTPATH = process.env.BOTPATH || '/home/ubuntu/chatgpt-on-wechat';
+const BOT_PATH = process.env.BOT_PATH || '/home/ubuntu/chatgpt-on-wechat';
 const PORT = process.env.PORT || 14514;
 const OUTPUT_LIMIT = process.env.OUTPUT_LIMIT || 4096;
 
@@ -44,7 +44,7 @@ const addProc = async (params) => {
     return procId;
   }
   const proc = spawn('python3', ['app.py'], {
-    cwd: BOTPATH,
+    cwd: BOT_PATH,
     stdio: 'pipe',
     env: {
       CONFIG_PATH: (params?.info?.configPath || params?.info?.config_path) ?? 'config-template.json'

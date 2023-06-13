@@ -7,11 +7,19 @@ ChatGPT on Wechat web deployment
 - User management system with keys
 - Keys have expire dates, and processes get killed at their expire dates
 
-## Run
-```
-npm i
+## Usage
+Ensure Python ~3.8+ & NodeJS ~v16+ is installed (actual min support versions aren't tested)
+```shell
+cd ~
+git clone https://github.com/TMBMode/chatgpt-on-wechat.git
+git clone https://github.com/TMBMode/BotPanel.git
+cd chatgpt-on-wechat && pip install -r requirements.txt
+cd .. && mv BotPanel botpanel
+cd botpanel && npm i
+# set your environment variables (see table below) #
 node index.mjs
 ```
+For long-term runs, use `screen` before `node index.mjs` and use `ctrl-a-d` to detach before disconnecting SSH
  
 ## Environment Variables
 | Variable     | Value   | Usage   

@@ -37,6 +37,16 @@ const ask = async (q, p = '', d = undefined) => {
 const app = express();
 const PROCPOOL = [];
 
+const killProc = (proc) => {
+  log.info(`Killing PID ${proc.pid}`);
+  proc.stdin.end();
+  proc.stdout.destroy();
+  proc.stderr.destroy();
+  const res = proc.kill();
+  if (!res) log.warn(`Kill failed on PID ${proc.pid}`);
+  return res;
+};
+
 const addProc = async (params) => {
   const procId = params.key ?? generateUid();
   if (PROCPOOL[procId]) {
@@ -56,7 +66,7 @@ const addProc = async (params) => {
   };
   proc.stdout.on('data', (chunk) => {
     if (Date.now() > params.info.expires) {
-      proc.kill('SIGINT');
+      killProc(proc);
       log.notice(`Killed expired process ${procId}`);
       return PROCPOOL[procId] = null;
     }
@@ -107,7 +117,7 @@ app.get('/kill/:id', async (req, res) => {
     log.error(`Can't locate proc ${procId} to kill (ip: ${ip})`);
     return res.status(404).send('找不到进程');
   }
-  PROCPOOL[procId].proc.kill('SIGINT');
+  killProc(PROCPOOL[procId].proc);
   PROCPOOL[procId] = null;
   log.notice(`Killed proc ${procId} (ip: ${ip})`);
   res.status(200).send('成功结束');
@@ -209,7 +219,7 @@ rl.on('line', async (line) => {
       break;
     case 'kill':
       if (cmd[1] && cmd[1] in PROCPOOL) {
-        PROCPOOL[cmd[1]].proc.kill('SIGINT');
+        killProc(PROCPOOL[cmd[1]].proc);
         PROCPOOL[cmd[1]] = null;
         console.log(`Killed process ${cmd[1]}`);
       }
